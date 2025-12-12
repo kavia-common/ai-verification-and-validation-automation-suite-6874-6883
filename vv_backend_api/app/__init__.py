@@ -5,6 +5,7 @@ import os
 
 from .routes.health import blp as health_blp
 from .routes.api import blp as api_blp
+from .routes.upload import blp as upload_blp
 from .db import init_db
 
 app = Flask(__name__)
@@ -32,6 +33,7 @@ app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-
 api = Api(app)
 api.register_blueprint(health_blp)
 api.register_blueprint(api_blp)
+api.register_blueprint(upload_blp)
 
 # Initialize database and create tables
 # init_db uses DATABASE_URL if present, otherwise falls back to SQLite under DATA_DIR.
