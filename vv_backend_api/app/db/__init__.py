@@ -109,7 +109,8 @@ def init_db(app=None):
     from . import models  # noqa: F401  # pylint: disable=unused-import
 
     engine = get_engine()
-    Base.metadata.create_all(bind=engine)
+    # Use checkfirst=True to prevent attempts to recreate existing tables/indexes (e.g., duplicate index errors on SQLite)
+    Base.metadata.create_all(bind=engine, checkfirst=True)
     if app:
         # Optionally, you can tie teardown to app context
         @app.teardown_appcontext
